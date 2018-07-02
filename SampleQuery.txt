@@ -1,0 +1,13 @@
+SELECT isnull(last_name_l, '') + ', ' + isnull(first_name_l, '') + ' ' + isnull(middle_name_l, '') AS [Full name], 
+		last_name_l AS [Last Name],
+		first_name_l AS [First Name],
+		middle_name_l AS [Middle Name],
+		case when sex_rcd = 'M' then 'Male'
+			 when sex_rcd = 'F' then 'Female'
+			 when sex_rcd not in ('M', 'F') then '---' 
+			 end AS Gender,
+		DATEDIFF(YEAR,date_of_birth,GETDATE()) AS Age,
+		job_title_name_l AS Position,
+		department_name_l AS Department
+FROM [dbo].[employee_employment_info_view]
+ORDER BY last_name_l ASC, first_name_l ASC, middle_name_l ASC
